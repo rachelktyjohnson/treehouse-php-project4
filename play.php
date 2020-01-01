@@ -57,12 +57,17 @@ if (!isset($_GET['key'])) {
         echo $_SESSION['game']->displayScore();
         ?>
     </div>
-    <?php } ?>
+    <?php }
+    $passSelected = $_SESSION['phrase']->getSelected();
+    $passSelectedArray = "['";
+    $passSelectedArray .= implode("','",$passSelected);
+    $passSelectedArray .= "']"
+    ?>
 
 
   </div>
   <script type="text/javascript">
-    var selectedArray = "<?php echo 'cheese'; ?>";
+    var selectedArray = "<?php print_r($passSelectedArray); ?>;"
   </script>
   <script type="text/javascript" src="js/script.js"></script>
 </body>
