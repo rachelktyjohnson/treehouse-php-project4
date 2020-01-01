@@ -1,5 +1,7 @@
 <?php
 
+require 'inc/phraseGenerator.php';
+
 class Phrase
 {
     protected $currentPhrase = ""; //the phrase that is being hunted
@@ -7,8 +9,8 @@ class Phrase
     protected $correct = [];
 
     public function __construct($phrase=null, $selected=null){
-      if ($phrase!=null){
-        $this->currentPhrase = $phrase;
+      if ($phrase==null){
+        $this->currentPhrase = phraseGenerator();
       }
       if ($selected!=null){
         $this->selected = $selected;

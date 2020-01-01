@@ -1,14 +1,12 @@
 <?php
 require "inc/Phrase.php";
 require "inc/Game.php";
-require 'inc/phraseGenerator.php';
 
 session_start();
 //if no game happening, start a new session with phrase and game
 if (!isset($_GET['key']) || $_GET['key']=="enter") {
 
-  $phraseString = phraseGenerator();
-  $_SESSION['phrase'] = new Phrase($phraseString);
+  $_SESSION['phrase'] = new Phrase();
   $_SESSION['game'] = new Game($_SESSION['phrase']);
 } else {
   $selection = filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING);
