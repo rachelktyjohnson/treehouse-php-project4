@@ -5,7 +5,7 @@ require 'inc/phraseGenerator.php';
 
 session_start();
 //if no game happening, start a new session with phrase and game
-if (!isset($_GET['key'])) {
+if (!isset($_GET['key']) || $_GET['key']=="enter") {
 
   $phraseString = phraseGenerator();
   $_SESSION['phrase'] = new Phrase($phraseString);
