@@ -18,10 +18,7 @@ if (!isset($_GET['key'])) {
   } else {
     $_SESSION['phrase']->appendCorrect($selection);
   }
-
 }
-
-//if game happening, just keep going
 ?>
 
 <!DOCTYPE html>
@@ -36,34 +33,37 @@ if (!isset($_GET['key'])) {
 </head>
 
 <body>
-<div class="main-container">
-  <?php
-  if ($_SESSION['game']->checkForWin() || $_SESSION['game']->checkForLose()){ ?>
+  <div class="main-container">
     <?php
-    if ($_SESSION['game']->checkForWin()){
-      $theClass="win";
-    } else {
-      $theClass="lose";
-    }
-    ?>
-    <div id="overlay" class="<?= $theClass; ?>">
-      <h1 id="game-over-message"><?php echo $_SESSION['game']->gameOver(); ?></h1>
-  		<a href="/play.php"><button id="btn__reset">Play Again!</button></a>
-  	</div>
-  <?php } else { ?>
-
-  <div id="banner" class="section">
-      <h2 class="header">Phrase Hunter</h2>
+    if ($_SESSION['game']->checkForWin() || $_SESSION['game']->checkForLose()){ ?>
       <?php
-      echo $_SESSION['phrase']->addPhraseToDisplay();
-      echo $_SESSION['game']->displayKeyboard();
-      echo $_SESSION['game']->displayScore();
+      if ($_SESSION['game']->checkForWin()){
+        $theClass="win";
+      } else {
+        $theClass="lose";
+      }
       ?>
+      <div id="overlay" class="<?= $theClass; ?>">
+        <h1 id="game-over-message"><?php echo $_SESSION['game']->gameOver(); ?></h1>
+    		<a href="/play.php"><button id="btn__reset">Play Again!</button></a>
+    	</div>
+    <?php } else { ?>
+
+    <div id="banner" class="section">
+        <h2 class="header">Phrase Hunter</h2>
+        <?php
+        echo $_SESSION['phrase']->addPhraseToDisplay();
+        echo $_SESSION['game']->displayKeyboard();
+        echo $_SESSION['game']->displayScore();
+        ?>
+    </div>
+    <?php } ?>
+
+
   </div>
-  <?php } ?>
-
-
-</div>
-
+  <script type="text/javascript">
+    var selectedArray = "<?php echo 'cheese'; ?>";
+  </script>
+  <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
