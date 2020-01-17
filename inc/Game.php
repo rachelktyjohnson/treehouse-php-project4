@@ -9,6 +9,10 @@ class Game
     $this->phrase = $phraseObject;
   }
 
+  public function getLives(){
+    return $this->lives;
+  }
+
   public function removeLife(){
     $this->lives--;
   }
@@ -17,18 +21,12 @@ class Game
   public function checkForWin(){
     $phraseArray = str_split($this->phrase->getCurrentPhrase());
     $phraseArrayUnique = array_unique($phraseArray);
-    if (count($phraseArrayUnique)-1 == count($this->phrase->getCorrect())){
-      return true;
-    } else {
-      return false;
-    }
+    return count($phraseArrayUnique)-1 == count($this->phrase->getCorrect());
   }
 
   //checkForLose(): this method checks to see if the player has guessed too many wrong letters.
   public function checkForLose(){
-    if ($this->lives == 0){
-      return true;
-    }
+    return $this->lives == 0;
   }
 
   //gameOver(): this method displays one message if the player wins and another message if they lose. It returns false if the game has not been won or lost.

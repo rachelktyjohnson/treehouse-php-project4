@@ -1,5 +1,9 @@
+//check if we're still listening
+if (gameState=="running"){
+
 //event listener for when the physical keyboard is pressed
 window.addEventListener('keypress', (e) => {
+
   //check the key is alpha
   if(/[a-z]/i.test( e.key )){
     let keypressed = e.key.toLowerCase();
@@ -11,11 +15,7 @@ window.addEventListener('keypress', (e) => {
       window.location.href = `play.php?key=${keypressed}`;
     }
 
-
   }
 
-
-
-
-
-});
+})
+}

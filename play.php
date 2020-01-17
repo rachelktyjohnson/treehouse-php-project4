@@ -4,7 +4,7 @@ require "inc/Game.php";
 
 session_start();
 //if no game happening, start a new session with phrase and game
-if (!isset($_GET['key']) || $_GET['key']=="enter") {
+if (!isset($_GET['key'])) {
 
   $_SESSION['phrase'] = new Phrase();
   $_SESSION['game'] = new Game($_SESSION['phrase']);
@@ -30,11 +30,13 @@ if (!isset($_GET['key']) || $_GET['key']=="enter") {
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 
-<body>
+<body onkeydown="return (event.keyCode != 116)">
   <div class="main-container">
     <?php
-    if ($_SESSION['game']->checkForWin() || $_SESSION['game']->checkForLose()){ ?>
-      <?php
+    $gameState="running";
+
+    if ($_SESSION['game']->checkForWin() || $_SESSION['game']->checkForLose()){
+      $gameState="over";
       if ($_SESSION['game']->checkForWin()){
         $theClass="win";
       } else {
@@ -59,13 +61,15 @@ if (!isset($_GET['key']) || $_GET['key']=="enter") {
     $passSelected = $_SESSION['phrase']->getSelected();
     $passSelectedArray = "['";
     $passSelectedArray .= implode("','",$passSelected);
-    $passSelectedArray .= "']"
+    $passSelectedArray .= "']";
+
     ?>
 
 
   </div>
   <script type="text/javascript">
-    var selectedArray = "<?php print_r($passSelectedArray); ?>;"
+    var selectedArray = "<?php print_r($passSelectedArray); ?>;";
+    var gameState = "<?php echo $gameState;?>";
   </script>
   <script type="text/javascript" src="js/script.js"></script>
 </body>

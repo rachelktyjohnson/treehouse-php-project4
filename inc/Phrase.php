@@ -82,10 +82,7 @@ class Phrase
 
     //Checks to see if a letter matches a letter in the phrase. Accepts a single letter to check against the phrase. Returns true or false.
     public function checkLetter($letter){
-      if (strpos($this->currentPhrase, $letter) !== false) {
-        return true;
-      } else {
-        return false;
-      }
+      return strpos($this->currentPhrase, $letter) !== false;
+
     }
 }
